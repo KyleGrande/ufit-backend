@@ -1,7 +1,7 @@
 {
   "name": "ufit-backend",
   "version": "1.0.0",
-  "description": "Connecting to Mongo Databas:q",
+  "description": "Connecting to Mongo Database",
   "main": "index.js",
   "scripts": {
     "start": "nodemon app.js"
