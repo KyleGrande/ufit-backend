@@ -17,6 +17,15 @@ const kittySchema = new mongoose.Schema({
 });
 
 
+const Kitten = mongoose.model('Kitten', kittySchema);
+
+const silence = new Kitten({ name: 'Silence' });
+
+async function saveToDatabase(){
+  await silence.save();
+}
+
+saveToDatabase().catch(err=> console.log(err));
 
 app.get('/', (req, res) => {
   res.send('<h1>Hello Kyle & Ana!</h1>')
