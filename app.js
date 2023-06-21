@@ -1,14 +1,27 @@
 require('dotenv').config()
 const express = require('express');
 const app = express();
-const port = 3000;
+const mongoose = require('mongoose');
 
-console.log(process.env);
+// Connecting to Mongo cloud
+main().catch(err => console.log(err));
+
+
+async function main() {
+  await mongoose.connect(process.env.UFIT_URI);
+  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
+}
+
+const kittySchema = new mongoose.Schema({
+  name: String
+});
+
+
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('<h1>Hello Kyle & Ana!</h1>')
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+app.listen(process.env.UFIT_PORT, () => {
+  console.log(`Example app listening at http://localhost:${process.env.UFIT_PORT}`)
 })
