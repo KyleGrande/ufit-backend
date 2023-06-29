@@ -51,8 +51,6 @@ npm start
 
 ### Making Contributions
 
-[Github Docs](https://www.notion.so/Github-Docs-ff612891bbc34fdc9acef33bf75e3cba?pvs=21)
-
 Before anything else and every time you are going to work on the application you need to get all recent updates
 
 in the directory run
