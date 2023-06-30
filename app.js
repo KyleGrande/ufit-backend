@@ -1,11 +1,10 @@
-require('dotenv').config()
-const express = require('express');
+require("dotenv").config();
+const express = require("express");
 const app = express();
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 // Connecting to Mongo cloud
-main().catch(err => console.log(err));
-
+main().catch((err) => console.log(err));
 
 async function main() {
   await mongoose.connect(process.env.UFIT_URI);
@@ -13,24 +12,29 @@ async function main() {
 }
 
 const kittySchema = new mongoose.Schema({
-  name: String
+  name: String,
 });
 
+const Kitten = mongoose.model("Kitten", kittySchema);
 
-const Kitten = mongoose.model('Kitten', kittySchema);
+const silence = new Kitten({ name: "Silence" });
 
-const silence = new Kitten({ name: 'Silence' });
-
-async function saveToDatabase(){
+async function saveToDatabase() {
   await silence.save();
 }
 
-saveToDatabase().catch(err=> console.log(err));
+saveToDatabase().catch((err) => console.log(err));
 
-app.get('/', (req, res) => {
-  res.send('<h1>Hello Kyle & Ana!</h1>')
-})
+app.get("/", (req, res) => {
+  res.send("<h1>Hello Kyle & Ana!</h1>");
+});
+
+app.use(express.json())
+const userRoute = require("./src/routes/user.route");
+app.use("/api/users", userRoute);
 
 app.listen(process.env.UFIT_PORT, () => {
-  console.log(`Example app listening at http://localhost:${process.env.UFIT_PORT}`)
-})
+  console.log(
+    `Example app listening at http://localhost:${process.env.UFIT_PORT}`
+  );
+});
