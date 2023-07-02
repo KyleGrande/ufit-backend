@@ -1,0 +1,7 @@
+program{id, name, description, category, user_id, session[{name, movement(id)}]}
+
+movement{id, section, name, typeTracking{sets,reps}, movementDescription, movementLink}
+
+rounds{id, startTime, endTime, movement_id, user_id}
+
+feedback{id, program_id, user_id, comment, rating[1-10]

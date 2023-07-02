@@ -33,6 +33,18 @@ app.use(express.json())
 const userRoute = require("./src/routes/user.route");
 app.use("/api/users", userRoute);
 
+const movementRoute = require("./src/routes/movement.route");
+app.use("/api/movement", movementRoute);
+
+const roundsRoute = require("./src/routes/rounds.route");
+app.use("/api/rounds", roundsRoute);
+
+const programRoute = require("./src/routes/program.route");
+app.use("/api/program", programRoute);
+
+const feedbackRoute = require("./src/routes/feedback.route");
+app.use("/api/feedback", feedbackRoute);
+
 app.listen(process.env.UFIT_PORT, () => {
   console.log(
     `Example app listening at http://localhost:${process.env.UFIT_PORT}`
