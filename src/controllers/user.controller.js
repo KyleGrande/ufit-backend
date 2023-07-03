@@ -50,6 +50,40 @@ class userController {
       });
     }
   }
+  
+  async login(req, res) {
+    const payload = req.body;
+    console.log("payload", payload);
+    const { password } = payload;
+    try {
+      const data = await userService.getItemByEmail(payload);
+      if (data) {
+        if (data.password === password) {
+          return res.status(200).json({
+            success: true,
+            message: "User logged in",
+            data,
+          });
+        }
+        return res.status(200).json({
+            success: false,
+            message: "Incorrect password",
+            data: null,
+          });
+      }
+      return res.status(200).json({
+        success: false,
+        message: "Email does not exist",
+        data: null,
+      });
+    } catch (error) {
+      return res.status(200).json({
+        success: false,
+        message: "Exception",
+        error,
+      });
+    }
+  }
 
   async updateItem(req, res) {
     const payload = req.body;

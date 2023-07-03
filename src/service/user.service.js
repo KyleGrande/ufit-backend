@@ -12,6 +12,14 @@ class service {
     const data = await request.save();
     return data;
   }
+
+  async getItemByEmail(payload) {
+    const { email }=payload;
+    const data = await userModel.findOne({email}).exec();
+    console.log('data', data);
+    return data;
+  }
+  
   //here is the query to find user by id and update data
   async updateItem(payload) {
     const { id } = payload; //object destructuring

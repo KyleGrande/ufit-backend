@@ -4,6 +4,7 @@ const userController = require("../controllers/user.controller");
 
 router.get("/", userController.getItems);
 router.post("/", userController.insertItem);
+router.post("/login", userController.login);
 router.put("/by-id", userController.updateItem);
 router.delete("/by-id/:id", userController.deleteItemById);
 
