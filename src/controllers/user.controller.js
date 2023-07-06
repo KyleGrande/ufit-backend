@@ -1,3 +1,4 @@
+const { comparePasswords } = require("../helper-function/bcrypt.helper"); //add bcrypt helper func
 const userService = require("../service/user.service");
 
 class userController {
@@ -29,6 +30,17 @@ class userController {
     const payload = req.body;
     console.log("payload", payload);
     try {
+      const userExist = await userService.getItemByEmailOrUserName(payload); //check existance of user
+
+      if (userExist.length > 0) {
+        return res.status(200).json({
+          success: false,
+
+          message: "Either email or user name already exists",
+
+          data: null,
+        });
+      }
       const data = await userService.insertItem(payload);
       if (data) {
         return res.status(200).json({
@@ -50,7 +62,7 @@ class userController {
       });
     }
   }
-  
+
   async login(req, res) {
     const payload = req.body;
     console.log("payload", payload);
@@ -58,7 +70,7 @@ class userController {
     try {
       const data = await userService.getItemByEmail(payload);
       if (data) {
-        if (data.password === password) {
+        if (comparePasswords(password, data.password)) { //compare passwords
           return res.status(200).json({
             success: true,
             message: "User logged in",
@@ -66,10 +78,10 @@ class userController {
           });
         }
         return res.status(200).json({
-            success: false,
-            message: "Incorrect password",
-            data: null,
-          });
+          success: false,
+          message: "Incorrect password",
+          data: null,
+        });
       }
       return res.status(200).json({
         success: false,
