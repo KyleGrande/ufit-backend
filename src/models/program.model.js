@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const sessionSchema = new Schema({
   name: { type: String },
-  movementId: { type: ObjectId },
+  movementId: [{ type: ObjectId }], //change to array of movents
 });
 const programModel = new Schema({
   programName: { type: String, required: true },
