@@ -1,9 +1,9 @@
-const programService = require("../service/program.service");
+const workoutHistoryService = require("../service/workoutHistory.service");
 
-class programController {
+class workoutHistoryController {
   async getItems(req, res) {
     try {
-      const data = await programService.getItems();
+      const data = await workoutHistoryService.getItems();
       if (data.length > 0) {
         return res.status(200).json({
           success: true,
@@ -25,13 +25,13 @@ class programController {
     }
   }
 
-  async getItemByUserId(req, res) {
+  async getItemByProgramId(req, res) {
     try {
-      const data = await programService.getItemByUserId(req.params);
+      const data = await workoutHistoryService.getItemByProgramId(req.params);
       if (data.length > 0) {
         return res.status(200).json({
           success: true,
-          message: "Data acquired",
+          message: "Data aquired",
           data,
         });
       }
@@ -53,17 +53,17 @@ class programController {
     const payload = req.body;
     console.log("payload", payload);
     try {
-      const data = await programService.insertItem(payload);
+      const data = await workoutHistoryService.insertItem(payload);
       if (data) {
         return res.status(200).json({
           success: true,
-          message: "program created",
+          message: "workoutHistory created",
           data,
         });
       }
       return res.status(200).json({
         success: false,
-        message: "Failed to create program",
+        message: "Failed to create workoutHistory",
         data: null,
       });
     } catch (error) {
@@ -79,17 +79,17 @@ class programController {
     const payload = req.body;
     console.log("payload", payload);
     try {
-      const data = await programService.updateItem(payload);
+      const data = await workoutHistoryService.updateItem(payload);
       if (data) {
         return res.status(200).json({
           success: true,
-          message: "Program updated",
+          message: "workoutHistory updated",
           data,
         });
       }
       return res.status(200).json({
         success: false,
-        message: "Failed to update program",
+        message: "Failed to update workoutHistory",
         data: null,
       });
     } catch (error) {
@@ -105,17 +105,17 @@ class programController {
     const payload = req.params;
     console.log("payload", payload);
     try {
-      const data = await programService.deleteItemById(payload);
+      const data = await workoutHistoryService.deleteItemById(payload);
       if (data) {
         return res.status(200).json({
           success: true,
-          message: "Program deleted",
+          message: "workoutHistory deleted",
           data,
         });
       }
       return res.status(200).json({
         success: false,
-        message: "Failed to delete program",
+        message: "Failed to delete workoutHistory",
         data: null,
       });
     } catch (error) {
@@ -128,4 +128,4 @@ class programController {
   }
 }
 
-module.exports = new programController();
+module.exports = new workoutHistoryController();

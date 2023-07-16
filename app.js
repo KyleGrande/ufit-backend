@@ -45,6 +45,9 @@ app.use("/api/program", programRoute);
 const feedbackRoute = require("./src/routes/feedback.route");
 app.use("/api/feedback", feedbackRoute);
 
+const workoutHistoryRoute = require("./src/routes/workoutHistory.route");
+app.use("/api/workout-history", workoutHistoryRoute);
+
 app.listen(process.env.UFIT_PORT, () => {
   console.log(
     `Example app listening at http://localhost:${process.env.UFIT_PORT}`
