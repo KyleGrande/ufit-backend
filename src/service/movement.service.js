@@ -1,4 +1,4 @@
-const { model } = require("mongoose");
+const { model, get } = require("mongoose");
 const movementModel = require("../models/movement.model");
 
 class service {
@@ -26,6 +26,14 @@ class service {
     const data = await movementModel.deleteOne({ _id: id }); //in mongodb our document is _id, but in front end it is id
     return data.deletedCount || null;
   }
+
+  async getItemsById(ids) {
+    const data = await movementModel.find({ _id: { $in: ids } }).exec();
+    console.log("Data from DB:", data);
+    return data;
+  }
+
 }
+
 
 module.exports = new service();
