@@ -2,15 +2,15 @@ const { ObjectId } = require("mongodb");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const workoutDetailSchema = new Schema({
-  name: { type: String },
-  weight: { type: String }, //change to array of movents
-});
+// const workoutDetailSchema = new Schema({
+//   name: { type: String },
+//   weight: { type: String }, //change to array of movents
+// });
 
-const workoutSchema = new Schema({
-  name: { type: String },
-  workoutDetail: [workoutDetailSchema], //change to array of movents
-});
+// const workoutSchema = new Schema({
+//   name: { type: String },
+//   workoutDetail: [workoutDetailSchema], //change to array of movents
+// });
 
 const sessionSchema = new Schema({
   name: { type: String },
@@ -23,7 +23,7 @@ const programModel = new Schema({
   programCategory: { type: String, required: true },
   userId: { type: ObjectId, required: false },
   session: [sessionSchema],
-  workout: [workoutSchema],
+  // workout: [workoutSchema],
 });
 
 module.exports = mongoose.model("program", programModel);
