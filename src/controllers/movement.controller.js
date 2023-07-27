@@ -24,7 +24,31 @@ class movementController {
       });
     }
   }
-
+  async getItemsById(req, res) {
+    const ids = req.body.ids;
+    console.log("ids", ids);
+    try {
+      const data = await movementService.getItemsById(ids);
+      if (data) {
+        return res.status(200).json({
+          success: true,
+          message: "Data aquired",
+          data: data,
+        });
+      }
+      return res.status(200).json({
+        success: false,
+        message: "No data",
+        data: null,
+      });
+    } catch (error) {
+      return res.status(200).json({
+        success: false,
+        message: "Exception",
+        error,
+      });
+    }
+  }
   async insertItem(req, res) {
     const payload = req.body;
     console.log("payload", payload);
