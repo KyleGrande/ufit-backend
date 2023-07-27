@@ -1,7 +1,10 @@
 require("dotenv").config();
 const express = require("express");
+const https = require("https");
 const app = express();
 const mongoose = require("mongoose");
+const fs = require("fs");
+const cors = require("cors");
 
 // Connecting to Mongo cloud
 main().catch((err) => console.log(err));
@@ -28,8 +31,13 @@ saveToDatabase().catch((err) => console.log(err));
 app.get("/", (req, res) => {
   res.send("<h1>Hello Kyle & Ana!</h1>");
 });
+const corsOptions = {
+  origin: "*",
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
-app.use(express.json())
+app.use(express.json());
 const userRoute = require("./src/routes/user.route");
 app.use("/api/users", userRoute);
 
@@ -53,3 +61,15 @@ app.listen(process.env.UFIT_PORT, () => {
     `Example app listening at http://localhost:${process.env.UFIT_PORT}`
   );
 });
+
+https
+  .createServer(
+    {
+      key: fs.readFileSync("key.pem"),
+      cert: fs.readFileSync("cert.pem"),
+    },
+    app
+  )
+  .listen(4000, () => {
+    console.log("server is runing at port 4000");
+  });
