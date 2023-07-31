@@ -1,8 +1,14 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const typeTrackingSchema = new Schema({
+  trackingType: { type: String },
   sets: { type: Number },
   reps: { type: Number },
+  rounds: {type: String}, 
+  roundMin:{type: String}, 
+  roundSec: {type: String},
+  restMin: {type: String},
+  restSec: {type: String},
 });
 const movementModel = new Schema({
   movementId: { type: String, required: false },
