@@ -4,15 +4,16 @@ const Schema = mongoose.Schema;
 
 const trackingDataSchema = new Schema({
   trackingType: { type: String, required: true },
-  reps: { type: Number, required: true },
-  sets: { type: Number, required: true },
-  rounds: { type: Number, required: true },
-  roundSec: { type: Number, required: true },
-  restMin: { type: Number, required: true },
-  restSec: { type: Number, required: true },
-  genMin: { type: Number, required: true },
-  genSec: { type: Number, required: true },
-  speed: { type: Number, required: true },
+  reps: { type: Number, required: false },
+  sets: { type: Number, required: false },
+  rounds: { type: Number, required: false },
+  roundSec: { type: Number, required: false },
+  restMin: { type: Number, required: false },
+  restSec: { type: Number, required: false },
+  genMin: { type: Number, required: false },
+  genSec: { type: Number, required: false },
+  speed: { type: Number, required: false },
+  weight: {type:Number, required: false },
 });
 
 const movementSchema = new Schema({
@@ -20,7 +21,7 @@ const movementSchema = new Schema({
   movementName: { type: String, required: true },
   movementDescription: { type: String, required: false },
   movementLink: { type: String, required: false },
-  tracking: trackingDataSchema,
+  trackingData: trackingDataSchema,
 });
 
 const historyModel = new Schema({
