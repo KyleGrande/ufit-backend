@@ -4,11 +4,11 @@ const typeTrackingSchema = new Schema({
   trackingType: { type: String },
   sets: { type: Number },
   reps: { type: Number },
-  rounds: {type: String}, 
-  roundMin:{type: String}, 
-  roundSec: {type: String},
-  restMin: {type: String},
-  restSec: {type: String},
+  rounds: {type: Number}, 
+  roundMin:{type: Number}, 
+  roundSec: {type: Number},
+  restMin: {type: Number},
+  restSec: {type: Number},
 });
 const movementModel = new Schema({
   movementId: { type: String, required: false },
