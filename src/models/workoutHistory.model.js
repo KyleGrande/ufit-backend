@@ -14,6 +14,11 @@ const trackingDataSchema = new Schema({
   genSec: { type: Number, required: false },
   speed: { type: Number, required: false },
   weight: {type:Number, required: false },
+  setsCompleted : {type: Number, required: false},
+  roundsCompleted : {type: Number, required: false},
+  roundMinRemain : {type: Number, required: false},
+  roundSecRemain : {type: Number, required: false},
+  notes: {type: String, required: false},
 });
 
 const movementSchema = new Schema({
