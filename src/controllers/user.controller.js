@@ -1,5 +1,6 @@
 const { comparePasswords } = require("../helper-function/bcrypt.helper"); //add bcrypt helper func
 const userService = require("../service/user.service");
+const jwt = require("jsonwebtoken");
 
 class userController {
   async getItems(req, res) {
@@ -65,16 +66,51 @@ class userController {
 
   async login(req, res) {
     const payload = req.body;
+    console.log("-------------------------------");
     console.log("payload", payload);
+    console.log("-------------------------------");
+
     const { password } = payload;
     try {
       const data = await userService.getItemByEmail(payload);
       if (data) {
-        if (comparePasswords(password, data.password)) { //compare passwords
+        console.log("-------------------------------");
+        console.log("user found");
+        console.log("-------------------------------");
+
+        if (comparePasswords(password, data.password)) {
+          //compare passwords
+
+          console.log("-------------------------------");
+          console.log("passwords matched");
+          console.log("-------------------------------");
+
+          const token = jwt.sign(
+            {
+              id: data?._id,
+              firstName: data?.firstName,
+              lastName: data?.lastName,
+              phoneNumber: data?.phoneNumber,
+              userName: data?.userName,
+            },
+            process.env.SECRET_KEY,
+            {
+              expiresIn: "7d", //valid for 7 days
+            }
+          );
+          
+          console.log("-------------------------------");
+          console.log("token");
+          console.log(token);
+          console.log("-------------------------------");
+          console.log("jwt token generated");
+          console.log("-------------------------------");
+
           return res.status(200).json({
             success: true,
             message: "User logged in",
-            data,
+            // data,
+            token,
           });
         }
         return res.status(200).json({
