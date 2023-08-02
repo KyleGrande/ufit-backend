@@ -1,6 +1,7 @@
 const { comparePasswords } = require("../helper-function/bcrypt.helper"); //add bcrypt helper func
 const userService = require("../service/user.service");
 const jwt = require("jsonwebtoken");
+const { hashPassword } = require("../helper-function/bcrypt.helper");
 
 class userController {
   async getItems(req, res) {
@@ -77,8 +78,11 @@ class userController {
         console.log("-------------------------------");
         console.log("user found");
         console.log("-------------------------------");
+        console.log("password", password);
+        console.log("data.password", data.password);
+        console.log("-------------------------------");
 
-        if (comparePasswords(password, data.password)) {
+        if (await comparePasswords(password, data.password)) {
           //compare passwords
 
           console.log("-------------------------------");
@@ -92,13 +96,14 @@ class userController {
               lastName: data?.lastName,
               phoneNumber: data?.phoneNumber,
               userName: data?.userName,
+              email: data?.email,
             },
             process.env.SECRET_KEY,
             {
               expiresIn: "7d", //valid for 7 days
             }
           );
-          
+
           console.log("-------------------------------");
           console.log("token");
           console.log(token);
@@ -135,7 +140,9 @@ class userController {
 
   async updateItem(req, res) {
     const payload = req.body;
+    console.log("-------------------------------");
     console.log("payload", payload);
+    console.log("-------------------------------");
     try {
       const data = await userService.updateItem(payload);
       if (data) {

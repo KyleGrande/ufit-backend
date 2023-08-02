@@ -30,20 +30,23 @@ class service {
   }
   //this block to post data to our collection
   async insertItem(payload) {
-    const hashed=await hashPassword(payload.password)
-    const request = new userModel({...payload, password:hashed});
+    const hashed = await hashPassword(payload.password);
+    const request = new userModel({ ...payload, password: hashed });
     const data = await request.save();
     return data;
   }
 
-
-  
   //here is the query to find user by id and update data
   async updateItem(payload) {
-    const { id } = payload; //object destructuring
-    const data = await userModel.findByIdAndUpdate(id, payload, {
+    const { _id, password } = payload; //object destructuring
+    const tempPayload = {
+      ...payload,
+      password: password ? await hashPassword(password) : null,
+    };
+    const data = await userModel.findByIdAndUpdate(_id, tempPayload, {
       returnOriginal: false,
     });
+    console.log("data", data);
     return data;
   }
   //here we are deleting the user document by id
