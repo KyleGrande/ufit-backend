@@ -7,6 +7,14 @@ class service {
     return data;
   }
 
+  async getItemByUserId(payload) {
+    console.log("payload", payload);
+    const { userId } = payload;
+    const data = await workoutHistoryModel.find({ userId }).exec();
+    console.log("data", data);
+    return data;
+  }
+
   async getItemByProgramId(payload) {
     console.log("payload", payload);
     const { programId } = payload;

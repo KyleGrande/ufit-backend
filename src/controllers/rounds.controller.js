@@ -25,6 +25,30 @@ class roundsController {
     }
   }
 
+  async getItemByUserId(req, res) {
+    try {
+      const data = await roundsService.getItemByUserId(req.params);
+      if (data.length > 0) {
+        return res.status(200).json({
+          success: true,
+          message: "Data aquired",
+          data,
+        });
+      }
+      return res.status(200).json({
+        success: false,
+        message: "No data",
+        data: null,
+      });
+    } catch (error) {
+      return res.status(200).json({
+        success: false,
+        message: "Exception",
+        error,
+      });
+    }
+  }
+
   async insertItem(req, res) {
     const payload = req.body;
     console.log("payload", payload);

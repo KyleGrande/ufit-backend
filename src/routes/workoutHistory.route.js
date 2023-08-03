@@ -3,6 +3,7 @@ const router = express.Router();
 const workoutHistoryController = require("../controllers/workoutHistory.controller");
 
 router.get("/", workoutHistoryController.getItems);
+router.get("/by-user-id/:userId", workoutHistoryController.getItemByProgramId);
 router.get(
   "/by-program-id/:programId",
   workoutHistoryController.getItemByProgramId

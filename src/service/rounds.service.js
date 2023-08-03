@@ -6,6 +6,15 @@ class service {
     const data = await roundsModel.find().exec();
     return data;
   }
+
+  async getItemByUserId(payload) {
+    console.log("payload", payload);
+    const { userId } = payload;
+    const data = await roundsModel.find({ userId }).exec();
+    console.log("data", data);
+    return data;
+  }
+
   //this block to post data to our collection
   async insertItem(payload) {
     const request = new roundsModel(payload);

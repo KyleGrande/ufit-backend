@@ -6,6 +6,14 @@ class service {
     const data = await feedbackModel.find().exec();
     return data;
   }
+
+  async getItemByUserId(payload) {
+    console.log("payload", payload);
+    const { userId } = payload;
+    const data = await feedbackModel.find({ userId }).exec();
+    console.log("data", data);
+    return data;
+  }
   //this block to post data to our collection
   async insertItem(payload) {
     const request = new feedbackModel(payload);
