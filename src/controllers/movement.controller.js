@@ -49,6 +49,32 @@ class movementController {
       });
     }
   }
+  async getItemById(req,res) {
+    const payload = req.params;
+    console.log("payload", payload);
+    try {
+      const data = await movementService.getItemById(payload);
+      if (data) {
+        return res.status(200).json({
+          success: true,
+          message: "Movement Found",
+          data,
+        });
+      }
+      return res.status(200).json({
+        success: false,
+        message: "Failed to find movement",
+        data: null,
+      });
+    } catch (error) {
+      return res.status(200).json({
+        success: false,
+        message: "Exception",
+        error,
+      });
+    }
+
+  }
   async insertItem(req, res) {
     const payload = req.body;
     console.log("payload", payload);

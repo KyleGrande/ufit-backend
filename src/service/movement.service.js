@@ -32,6 +32,13 @@ class service {
     console.log("Data from DB:", data);
     return data;
   }
+  // get individual movement
+  async getItemById(payload) {
+    const { id } = payload;    
+    const data = await movementModel.findById(id);
+    
+    return data;
+  }
 
 }
 
