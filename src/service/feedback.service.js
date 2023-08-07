@@ -14,6 +14,14 @@ class service {
     console.log("data", data);
     return data;
   }
+
+  async getItemByProgramId(payload) {
+    console.log("payload", payload);
+    const { programId } = payload;
+    const data = await feedbackModel.find({ programId }).exec();
+    console.log("data", data);
+    return data;
+  }
   //this block to post data to our collection
   async insertItem(payload) {
     const request = new feedbackModel(payload);
