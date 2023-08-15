@@ -19,6 +19,7 @@ const sessionSchema = new Schema({
 
 const programModel = new Schema({
   originalProgramId: { type: ObjectId, required: false },
+  isCreatedByAI: { type: Boolean, required: false },
   programName: { type: String, required: true },
   programDescription: { type: String, required: true },
   programCategory: { type: String, required: true },
